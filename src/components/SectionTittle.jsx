@@ -4,7 +4,7 @@ const SectionTitle = ({ subHeading, heading }) => {
   return (
     <div className="text-center mb-10 max-w-xl mx-auto space-y-2">
       {/* Subheading */}
-      <p className="text-sm sm:text-base text-sky-500 uppercase tracking-widest font-medium">
+      <p className="text-sm sm:text-base text-blue-500 uppercase tracking-widest font-medium">
         {subHeading}
       </p>
 
@@ -14,7 +14,7 @@ const SectionTitle = ({ subHeading, heading }) => {
       </h1>
 
       {/* Divider */}
-      <div className="w-16 h-1 bg-sky-500 mx-auto rounded-full"></div>
+      <div className="w-16 h-1 bg-blue-500 mx-auto rounded-full"></div>
     </div>
   );
 };
