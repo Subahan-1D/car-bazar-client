@@ -1,0 +1,129 @@
+[
+    {
+      "_id": 1,
+      "category": "Car Wash",
+      "title": "Premium Car Wash",
+      "price": 25,
+      "image": "https://i.ibb.co.com/m5Q7N9P0/images.jpg",
+      "description": "Complete exterior and interior wash with wax polish.",
+      "features": [
+        "Eco-friendly shampoo",
+        "Interior vacuuming",
+        "Polish finish",
+        "30-minute service"
+      ]
+    },
+    {
+      "_id": 2,
+      "category": "Engine Replace",
+      "title": "Engine Replacement Service",
+      "price": 52,
+      "image": "https://i.ibb.co.com/m5Q7N9P0/images.jpg",
+      "description": "Reliable engine replacement with 6-month warranty.",
+      "features": [
+        "Expert mechanics",
+        "Quick diagnostics",
+        "OEM parts used",
+        "Free follow-up check"
+      ]
+    },
+    {
+      "_id": 3,
+      "category": "Tire Repair",
+      "title": "Tire Repair & Balancing",
+      "price": 18,
+      "image": "https://i.ibb.co.com/m5Q7N9P0/images.jpg",
+      "description": "Get your tires repaired and balanced for better performance.",
+      "features": [
+        "Flat tire fix",
+        "Tire rotation",
+        "Pressure check",
+        "Fast service"
+      ]
+    },
+    {
+      "_id": 4,
+      "category": "Car Paint",
+      "title": "Full Car Painting",
+      "price": 150,
+      "image": "https://i.ibb.co.com/m5Q7N9P0/images.jpg",
+      "description": "Scratch removal with custom paint options.",
+      "features": [
+        "UV resistant paint",
+        "Scratch protection",
+        "Color customization",
+        "Free waxing"
+      ]
+    },
+    {
+      "_id": 5,
+      "category": "Car Observation",
+      "title": "Full Car Diagnostic",
+      "price": 30,
+      "image": "https://i.ibb.co.com/m5Q7N9P0/images.jpg",
+      "description": "Complete system check for your car's health.",
+      "features": [
+        "Brake inspection",
+        "Engine health report",
+        "Lights & signals check",
+        "Battery condition"
+      ]
+    },
+    {
+      "_id": 6,
+      "category": "Home Service",
+      "title": "Mechanic at Home",
+      "price": 40,
+      "image": "https://i.ibb.co.com/m5Q7N9P0/images.jpg",
+      "description": "Professional car servicing at your doorstep.",
+      "features": [
+        "Doorstep service",
+        "Online appointment",
+        "Real-time tracking",
+        "Experienced technicians"
+      ]
+    },
+    {
+      "_id": 7,
+      "category": "AC Repair",
+      "title": "Car AC Repair",
+      "price": 35,
+      "image": "https://i.ibb.co.com/m5Q7N9P0/images.jpg",
+      "description": "Get your car AC checked, cleaned, and repaired quickly.",
+      "features": [
+        "Coolant refill",
+        "Filter cleaning",
+        "Noiseless performance",
+        "1-day delivery"
+      ]
+    },
+    {
+      "_id": 8,
+      "category": "Battery Service",
+      "title": "Battery Check & Replace",
+      "price": 45,
+      "image": "https://i.ibb.co.com/m5Q7N9P0/images.jpg",
+      "description": "Battery testing, jumpstart, and replacement service.",
+      "features": [
+        "Free battery check",
+        "On-spot replacement",
+        "Emergency support",
+        "Warranty included"
+      ]
+    },
+    {
+      "_id": 9,
+      "category": "Brake Service",
+      "title": "Brake Pad Replacement",
+      "price": 55,
+      "image": "https://i.ibb.co.com/m5Q7N9P0/images.jpg",
+      "description": "Smooth and safe braking with professional service.",
+      "features": [
+        "Original brake pads",
+        "Disc cleaning",
+        "Brake fluid check",
+        "Safety inspection"
+      ]
+    }
+  ]
+  

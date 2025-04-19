@@ -14,7 +14,7 @@ const SectionTitle = ({ subHeading, heading }) => {
       </h1>
 
       {/* Divider */}
-      <div className="w-16 h-1 bg-blue-500 mx-auto rounded-full"></div>
+      <div className="w-16 h-1 bg-blue-500 mx-auto rounded-full mb-2"></div>
     </div>
   );
 };

@@ -26,8 +26,8 @@ const Category = () => {
     <>
       <section>
         <SectionTittle
-          subHeading="From 6:00am to 10:00pm"
-          heading="Order Online"
+          subHeading="From 8:00am to 5:00pm"
+          heading="Working Hour"
         ></SectionTittle>
         <Swiper
           slidesPerView={4}
@@ -41,7 +41,7 @@ const Category = () => {
         >
           {slides.map((slide, index) => (
             <SwiperSlide key={index}>
-              <div className="w-full h-[300px] md:h-[400px] lg:h-[500px] mt-5 mb-4 overflow-hidden rounded-xl">
+              <div className="w-full h-[180px] md:h-[280px] lg:h-[380px] mt-5 mb-4 overflow-hidden rounded-xl">
                 <img
                   src={slide.src}
                   alt={`slide-${index}`}
