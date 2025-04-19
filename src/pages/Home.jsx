@@ -4,6 +4,7 @@ import Category from "./Category";
 import MechanicCard from "./MechanicCard";
 import OurService from "../components/OurService";
 import Featured from "./Featuared";
+import FeedBack from "./FeedBack";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Category></Category>
       <OurService></OurService>
       <Featured></Featured>
+      <FeedBack></FeedBack>
     </div>
   );
 };

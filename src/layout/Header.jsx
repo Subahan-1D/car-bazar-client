@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const navLinks = (
     <>
       <li>
-        <a className="hover:text-blue-500 transition">Home</a>
+        <Link to='/' className="hover:text-blue-500 transition">Home</Link>
       </li>
       <li>
         <a className="hover:text-blue-500 transition">About</a>
@@ -19,7 +20,7 @@ const Header = () => {
   );
 
   return (
-    <div className="navbar fixed z-50 top-0 max-w-screen-xl bg-white/80 backdrop-blur-sm text-black shadow-md px-4 lg:px-8">
+    <div className="navbar fixed z-50 top-0 max-w-screen-xl bg-white/80 backdrop-blur-sm text shadow-md px-4 lg:px-8">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

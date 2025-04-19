@@ -1,0 +1,17 @@
+.featured-item {
+    background-image: url('../../public/carbg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll; 
+    padding: 4rem 1rem;
+    border-radius: 1rem;
+    color: white;
+  }
+
+.feed-back{
+    background-image: url('../../public//feedback.jpg');
+    background-size: cover;
+    padding: 6rem 2rem;
+}
+  
