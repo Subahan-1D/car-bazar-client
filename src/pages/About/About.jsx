@@ -4,6 +4,8 @@ import Cover from "../../shared/Cover";
 import coverImg from "../../../public/coverImg.jpg";
 import WelcomeSection from "./WelcomeSection";
 import ServicesSection from "./ServicesSection";
+import MechanicCard from "../MechanicCard";
+import OurExpert from "./OurExpert";
 const About = () => {
   return (
     <div>
@@ -13,6 +15,7 @@ const About = () => {
       <Cover img={coverImg}></Cover>
       <WelcomeSection></WelcomeSection>
       <ServicesSection></ServicesSection>
+      <OurExpert></OurExpert>
     </div>
   );
 };
