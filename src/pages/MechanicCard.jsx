@@ -19,7 +19,7 @@ const MechanicCard = () => {
           <h3 className="text-lg font-semibold text-gray-800">
             Expert Mechanic
           </h3>
-          <Link to='/' className="text-sky-600 hover:text-sky-800">
+          <a href="#" className="text-sky-600 hover:text-sky-800">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -34,7 +34,7 @@ const MechanicCard = () => {
                 d="M9 5l7 7-7 7"
               />
             </svg>
-          </Link>
+          </a>
         </div>
       </div>
 
@@ -51,7 +51,7 @@ const MechanicCard = () => {
           <h3 className="text-lg font-semibold text-gray-800">
             Quick Service
           </h3>
-          <Link to='/' className="text-sky-600 hover:text-sky-800">
+          <a href="#" className="text-sky-600 hover:text-sky-800">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -66,7 +66,7 @@ const MechanicCard = () => {
                 d="M9 5l7 7-7 7"
               />
             </svg>
-          </Link>
+          </a>
         </div>
       </div>
 
@@ -83,7 +83,7 @@ const MechanicCard = () => {
           <h3 className="text-lg font-semibold text-gray-800">
             Engine Upgrades
           </h3>
-          <Link to='/' className="text-sky-600 hover:text-sky-800">
+          <a href="#" className="text-sky-600 hover:text-sky-800">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -98,7 +98,7 @@ const MechanicCard = () => {
                 d="M9 5l7 7-7 7"
               />
             </svg>
-          </Link>
+          </a>
         </div>
       </div>
     </div>
