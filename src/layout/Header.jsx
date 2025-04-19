@@ -8,7 +8,7 @@ const Header = () => {
         <Link to='/' className="hover:text-blue-500 transition">Home</Link>
       </li>
       <li>
-        <a className="hover:text-blue-500 transition">About</a>
+        <Link to='/about' className="hover:text-blue-500 transition">About</Link>
       </li>
       <li>
         <a className="hover:text-blue-500 transition">Services</a>
