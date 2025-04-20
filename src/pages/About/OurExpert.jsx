@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const OurExpert = () => {
   const [expert, setExpert] = useState([]);
   useEffect(() => {
-    fetch("expert.json")
+    fetch(`${import.meta.env.VITE_API_URL}/expert`)
       .then((res) => res.json())
       .then((data) => setExpert(data));
   }, []);

@@ -38,7 +38,7 @@ const OurServiceCard = ({ item }) => {
         </ul>
         <div className="flex justify-between items-center">
           <span className="text-lg font-bold text-blue-600">${price}</span>
-          <button className="text-white bg-blue-600 hover:bg-blue-700 px-4 py-1 rounded-md text-sm">
+          <button className="px-5 py-2 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 transition duration-300 border-orange-600 btn btn-outline border-0 border-b-4 text-sm">
             Buy Now
           </button>
         </div>

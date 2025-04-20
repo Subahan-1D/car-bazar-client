@@ -10,7 +10,7 @@ import "swiper/css/navigation";
 const FeedBack = () => {
   const [feedBack, setFeedBack] = useState([]);
   useEffect(() => {
-    fetch("feedback.json")
+    fetch(`${import.meta.env.VITE_API_URL}/feedback`)
       .then((res) => res.json())
       .then((data) => setFeedBack(data));
   }, []);
