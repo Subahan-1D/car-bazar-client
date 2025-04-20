@@ -82,5 +82,47 @@
       "Real-time tracking",
       "Experienced technicians"
     ]
+  },
+  {
+    "_id": 7,
+    "category": "Home Service",
+    "title": "Mechanic at Home",
+    "price": 40,
+    "image": "https://i.ibb.co.com/m5Q7N9P0/images.jpg",
+    "description": "Professional car servicing at your doorstep.",
+    "features": [
+      "Doorstep service",
+      "Online appointment",
+      "Real-time tracking",
+      "Experienced technicians"
+    ]
+  },
+  {
+    "_id": 8,
+    "category": "Home Service",
+    "title": "Mechanic at Home",
+    "price": 40,
+    "image": "https://i.ibb.co.com/m5Q7N9P0/images.jpg",
+    "description": "Professional car servicing at your doorstep.",
+    "features": [
+      "Doorstep service",
+      "Online appointment",
+      "Real-time tracking",
+      "Experienced technicians"
+    ]
+  },
+  {
+    "_id": 9,
+    "category": "Home Service",
+    "title": "Mechanic at Home",
+    "price": 40,
+    "image": "https://i.ibb.co.com/m5Q7N9P0/images.jpg",
+    "description": "Professional car servicing at your doorstep.",
+    "features": [
+      "Doorstep service",
+      "Online appointment",
+      "Real-time tracking",
+      "Experienced technicians"
+    ]
   }
 ]
