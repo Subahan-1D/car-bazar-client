@@ -6,6 +6,7 @@ import WelcomeSection from "./WelcomeSection";
 import ServicesSection from "./ServicesSection";
 import MechanicCard from "../MechanicCard";
 import OurExpert from "./OurExpert";
+import ServiceCategory from "./ServiceCategory";
 const About = () => {
   return (
     <div>
@@ -15,6 +16,7 @@ const About = () => {
       <Cover img={coverImg}></Cover>
       <WelcomeSection></WelcomeSection>
       <ServicesSection></ServicesSection>
+      <ServiceCategory></ServiceCategory>
       <OurExpert></OurExpert>
     </div>
   );

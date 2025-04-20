@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Links } from "react-router-dom";
 
 const Header = () => {
   const navLinks = (
@@ -11,7 +11,7 @@ const Header = () => {
         <Link to='/about' className="hover:text-blue-500 transition">About</Link>
       </li>
       <li>
-        <a className="hover:text-blue-500 transition">Services</a>
+        <Link to='/service' className="hover:text-blue-500 transition">Services</Link>
       </li>
       <li>
         <a className="hover:text-blue-500 transition">Contact</a>
@@ -46,7 +46,7 @@ const Header = () => {
             {navLinks}
           </ul>
         </div>
-        <a className="text-3xl font-bold text-blue-700">CarBazar</a>
+        <Link to='/' className="text-3xl font-bold text-blue-700">CarBazar</Link>
       </div>
 
       <div className="navbar-center hidden lg:flex">
