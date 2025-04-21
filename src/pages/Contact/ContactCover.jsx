@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Links } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import { Parallax, Background } from "react-parallax";
-const ServiceCoverImg = ({ img }) => {
+const ContactCover = ({ img }) => {
   return (
     <Parallax
-      blur={{ min: -50, max: 50 }}
+      blur={{ min: -30, max: 30 }}
       bgImage={img}
       bgImageAlt="the service"
       strength={-200}
@@ -17,11 +17,11 @@ const ServiceCoverImg = ({ img }) => {
             <div className="flex justify-between items-center text-2xl">
               <Link to="/">Home</Link>
               <IoIosArrowForward></IoIosArrowForward>
-              <Link to="/service">Service</Link>
+              <Link to="/contact">Contact</Link>
             </div>
-            <Link to='/contact' className="btn btn-primary mb-5 mt-5 text-xl">
+            <button className="btn btn-primary mb-5 mt-5 text-xl">
               Contact Us
-            </Link>
+            </button>
           </div>
         </div>
       </div>
@@ -29,4 +29,4 @@ const ServiceCoverImg = ({ img }) => {
   );
 };
 
-export default ServiceCoverImg;
+export default ContactCover;

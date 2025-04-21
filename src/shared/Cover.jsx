@@ -19,9 +19,9 @@ const Cover = ({ img }) => {
               <IoIosArrowForward></IoIosArrowForward>
               <Link to="/about">About</Link>
             </div>
-            <button className="btn btn-primary mb-5 mt-5 text-xl">
+            <Link to='/contact' className="btn btn-primary mb-5 mt-5 text-xl">
               Contact Us
-            </button>
+            </Link>
           </div>
         </div>
       </div>

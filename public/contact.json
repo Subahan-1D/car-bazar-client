@@ -1,0 +1,20 @@
+[
+  {
+    "_id": 1,
+    "name": "PHONE",
+    "phoneNumber": "01786727749",
+    "email": "subahanislam523@gmail.com"
+  },
+  {
+    "_id": 2,
+    "name": "ADDRESS",
+    "location": "Dinajpur Sadar Upazila",
+    "currentLocation": "At the modern crossroads"
+  },
+  {
+    "_id": 3,
+    "name": "WORKING HOUR",
+    "time": "From 8:00am",
+    "times": "To 5:00pm"
+  }
+]
