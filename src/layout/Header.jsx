@@ -56,9 +56,9 @@ const Header = () => {
       </div>
 
       <div className="navbar-end">
-        <a className="btn btn-md rounded-lg bg-blue-500 text-2xl hover:bg-blue-700 text-white  px-6 shadow">
+        <Link to='/login' className="btn btn-md rounded-lg bg-blue-500 text-2xl hover:bg-blue-700 text-white  px-6 shadow">
           Login
-        </a>
+        </Link>
       </div>
     </div>
   );
