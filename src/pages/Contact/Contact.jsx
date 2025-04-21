@@ -5,6 +5,7 @@ import contactImg from "../../../public/contact.jpg";
 import SectionTitle from "../../components/SectionTittle";
 import ContactCard from "./ContactCard";
 import ContactList from "./ContactList";
+import ContactForm from "./ContactFrom";
 const Contact = () => {
   return (
     <div>
@@ -19,6 +20,7 @@ const Contact = () => {
         ></SectionTitle>
       </div>
       <ContactList></ContactList>
+      <ContactForm></ContactForm>
     </div>
   );
 };
