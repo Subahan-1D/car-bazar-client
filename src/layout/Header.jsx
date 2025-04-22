@@ -57,7 +57,7 @@ const Header = () => {
 
       <div className="navbar-end">
         <Link to='/login' className="btn btn-md rounded-lg bg-blue-500 text-2xl hover:bg-blue-700 text-white  px-6 shadow">
-          Login
+         Sign In
         </Link>
       </div>
     </div>

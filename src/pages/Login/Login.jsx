@@ -1,6 +1,19 @@
+import { useEffect, useRef, useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  validateCaptcha,
+} from "react-simple-captcha";
 const Login = () => {
+  const captchaRef = useRef(null);
+  const [disabled, setDisabled] = useState(true);
+  const [showPassword, setShowPassword] = useState(false)
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
+
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -8,8 +21,17 @@ const Login = () => {
     const password = form.password.value;
     console.log(email, password);
   };
+  const handleValidedCaptcha = () => {
+    const user_captcha_value = captchaRef.current.value;
+    console.log(user_captcha_value);
+    if (validateCaptcha(user_captcha_value)) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  };
   return (
-    <div className="flex justify-center items-center min-h-[calc(100vh-306px)] mt-20">
+    <div className="flex justify-center items-center min-h-[calc(100vh-306px)]">
       <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl ">
         <div
           className="hidden bg-cover bg-center lg:block lg:w-1/2"
@@ -79,39 +101,78 @@ const Login = () => {
                 id="LoggingEmailAddress"
                 autoComplete="email"
                 name="email"
-                placeholder="you@example.com"
+                placeholder="email"
                 className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                 type="email"
               />
             </div>
-
+            <div className="relative mt-4">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="password"
+                className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
+                id="loggingPassword"
+                autoComplete="current-password"
+                required
+              />
+              <span
+                className="absolute top-4 right-4"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}
+              </span>
+            </div>
             <div className="mt-4">
               <div className="flex justify-between">
                 <label
                   className="block mb-2 text-sm font-medium text-gray-600 "
                   htmlFor="loggingPassword"
                 >
-                  Password
+                  <LoadCanvasTemplate />
                 </label>
               </div>
 
               <input
-                id="loggingPassword"
+                id="reloadCaptcha"
+                ref={captchaRef}
                 autoComplete="current-password"
-                name="password"
-                placeholder="type your password"
+                name="captcha"
+                placeholder="type the text above"
                 className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
-                type="password"
+                type="captcha"
               />
+              <div className="mt-6">
+                <button
+                  onClick={handleValidedCaptcha}
+                  className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-800 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
+                >
+                  {" "}
+                  Valided
+                </button>
+              </div>
             </div>
             <div className="mt-6">
-              <button
+              <input
                 type="submit"
+                disabled={disabled}
+                value="Sign In"
+                className={`w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-800 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50 ${
+                  disabled ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+              />
+            </div>
+           <div className="mt-6">
+           <Link to='/' >
+              <button
+                
                 className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-800 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
               >
-                Sign In
+                Sign In Cancel
               </button>
-            </div>
+            </Link>
+           </div>
+            
           </form>
 
           <div className="flex items-center justify-between mt-4">
@@ -119,7 +180,7 @@ const Login = () => {
 
             <Link
               to="/registration"
-              className="text-xs text-gray-500 uppercase  hover:underline"
+              className="text-xs text-blue-900 uppercase  hover:underline"
             >
               or sign up
             </Link>
