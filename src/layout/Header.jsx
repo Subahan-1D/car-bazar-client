@@ -1,23 +1,41 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, Links } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Header = () => {
+  const { user, logOut } = useContext(AuthContext);
   const navLinks = (
     <>
       <li>
-        <Link to='/' className="hover:text-blue-500 transition">Home</Link>
+        <Link to="/" className="hover:text-blue-500 transition">
+          Home
+        </Link>
       </li>
       <li>
-        <Link to='/about' className="hover:text-blue-500 transition">About</Link>
+        <Link to="/about" className="hover:text-blue-500 transition">
+          About
+        </Link>
       </li>
       <li>
-        <Link to='/service' className="hover:text-blue-500 transition">Services</Link>
+        <Link to="/service" className="hover:text-blue-500 transition">
+          Services
+        </Link>
       </li>
       <li>
-        <Link to='/contact' className="hover:text-blue-500 transition">Contact</Link>
+        <Link to="/contact" className="hover:text-blue-500 transition">
+          Contact
+        </Link>
       </li>
     </>
   );
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   return (
     <div className="navbar fixed z-50 top-0 max-w-screen-xl bg-white/80 backdrop-blur-sm text shadow-md px-4 lg:px-8">
@@ -46,7 +64,9 @@ const Header = () => {
             {navLinks}
           </ul>
         </div>
-        <Link to='/' className="text-3xl font-bold text-blue-700">CarBazar</Link>
+        <Link to="/" className="text-3xl font-bold text-blue-700">
+          CarBazar
+        </Link>
       </div>
 
       <div className="navbar-center hidden lg:flex">
@@ -55,11 +75,25 @@ const Header = () => {
         </ul>
       </div>
 
-      <div className="navbar-end">
-        <Link to='/login' className="btn btn-md rounded-lg bg-blue-500 text-2xl hover:bg-blue-700 text-white  px-6 shadow">
-         Sign In
-        </Link>
-      </div>
+      {user ? (
+        <div className="navbar-end">
+          <button
+            onClick={handleLogOut}
+            className="btn btn-md rounded-lg bg-blue-500 text-2xl hover:bg-blue-700 text-white  px-6 shadow"
+          >
+            Sign Out
+          </button>
+        </div>
+      ) : (
+        <div className="navbar-end">
+          <Link
+            to="/login"
+            className="btn btn-md rounded-lg bg-blue-500 text-2xl hover:bg-blue-700 text-white  px-6 shadow"
+          >
+            Sign In
+          </Link>
+        </div>
+      )}
     </div>
   );
 };
