@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import {
@@ -6,10 +6,13 @@ import {
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
+import { AuthContext } from "../../provider/AuthProvider";
+import { Helmet } from "react-helmet-async";
 const Login = () => {
+  const {signIn } = useContext(AuthContext);
   const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
@@ -20,6 +23,11 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
+    signIn(email, password)
+    .then((result) => {
+      const user = result.user;
+      console.log(user);
+    });
   };
   const handleValidedCaptcha = () => {
     const user_captcha_value = captchaRef.current.value;
@@ -31,6 +39,10 @@ const Login = () => {
     }
   };
   return (
+    <>
+    <Helmet>
+      <title>carBazar | sign in</title>
+    </Helmet>
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)]">
       <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl ">
         <div
@@ -162,17 +174,13 @@ const Login = () => {
                 }`}
               />
             </div>
-           <div className="mt-6">
-           <Link to='/' >
-              <button
-                
-                className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-800 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
-              >
-                Sign In Cancel
-              </button>
-            </Link>
-           </div>
-            
+            <div className="mt-6">
+              <Link to="/">
+                <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-800 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
+                  Sign In Cancel
+                </button>
+              </Link>
+            </div>
           </form>
 
           <div className="flex items-center justify-between mt-4">
@@ -190,6 +198,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
