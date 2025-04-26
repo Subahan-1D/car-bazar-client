@@ -1,6 +1,6 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
@@ -11,9 +11,11 @@ import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 const Login = () => {
   const { signIn } = useContext(AuthContext);
-  const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from= location.state?.from?.pathname || "/";
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
@@ -27,7 +29,7 @@ const Login = () => {
     signIn(email, password).then((result) => {
       const user = result.user;
       Swal.fire({
-        title: "Login Successfully!",
+        title: "User Login Successfully!",
         showClass: {
           popup: `
             animate__animated
@@ -43,11 +45,12 @@ const Login = () => {
           `,
         },
       });
+      navigate(from, { replace: true });
       console.log(user);
     });
   };
-  const handleValidedCaptcha = () => {
-    const user_captcha_value = captchaRef.current.value;
+  const handleValidedCaptcha = (e) => {
+    const user_captcha_value = e.target.value;
     console.log(user_captcha_value);
     if (validateCaptcha(user_captcha_value)) {
       setDisabled(false);
@@ -163,23 +166,14 @@ const Login = () => {
                 </div>
 
                 <input
+                  onBlur={handleValidedCaptcha}
                   id="reloadCaptcha"
-                  ref={captchaRef}
                   autoComplete="current-password"
                   name="captcha"
                   placeholder="type the text above"
                   className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                   type="captcha"
                 />
-                <div className="mt-6">
-                  <button
-                    onClick={handleValidedCaptcha}
-                    className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-800 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
-                  >
-                    {" "}
-                    Valided
-                  </button>
-                </div>
               </div>
               <div className="mt-6">
                 <input

@@ -26,6 +26,11 @@ const Header = () => {
           Contact
         </Link>
       </li>
+      <li>
+        <Link to="/secret" className="hover:text-blue-500 transition">
+          Secret
+        </Link>
+      </li>
     </>
   );
 
@@ -79,7 +84,7 @@ const Header = () => {
         <div className="navbar-end">
           <button
             onClick={handleLogOut}
-            className="btn btn-md rounded-lg bg-blue-500 text-2xl hover:bg-blue-700 text-white  px-6 shadow"
+            className="btn btn-md rounded-lg bg-blue-500 text-xl hover:bg-blue-700 text-white  px-6 shadow"
           >
             Sign Out
           </button>
@@ -88,7 +93,7 @@ const Header = () => {
         <div className="navbar-end">
           <Link
             to="/login"
-            className="btn btn-md rounded-lg bg-blue-500 text-2xl hover:bg-blue-700 text-white  px-6 shadow"
+            className="btn btn-md rounded-lg bg-blue-500 text-xl hover:bg-blue-700 text-white  px-6 shadow"
           >
             Sign In
           </Link>
