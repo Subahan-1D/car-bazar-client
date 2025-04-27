@@ -1,9 +1,13 @@
 import React, { useContext } from "react";
-import { Link, Links } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
   const navLinks = (
     <>
       <li>
@@ -40,6 +44,7 @@ const Header = () => {
       .catch((error) => {
         console.log(error.message);
       });
+    navigate(from, { replace: true });
   };
 
   return (

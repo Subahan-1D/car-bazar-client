@@ -30,7 +30,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "contact",
-        element: <Contact></Contact>,
+        element: (
+          <PrivateRoute>
+            <Contact></Contact>
+          </PrivateRoute>
+        ),
       },
       {
         path: "login",
