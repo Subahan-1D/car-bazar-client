@@ -1,7 +1,53 @@
 import React from "react";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
+import { axiosSecure } from "../../hooks/useAxiosSecure";
 
 const ServiceCard = ({ item }) => {
-  const { title, price, image, description, features } = item;
+  const { title, price, image, description, features, _id } = item;
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const handleAddCart = (service) => {
+    if (user && user?.email) {
+      // TODO : Sent to cart
+      const serviceCartItem = {
+        serviceItem: _id,
+        email: user?.email,
+        title,
+        image,
+        price,
+      };
+      axiosSecure.post("/carts", serviceCartItem).then((res) => {
+        console.log(res.data);
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${title} added to your cart`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+    } else {
+      Swal.fire({
+        title: "You are not Logged In ",
+        text: "please logged in add to the cart",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login", { state: { from: location } });
+        }
+      });
+    }
+    console.log(service, user.email);
+  };
 
   return (
     <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300 overflow-hidden border border-gray-200">
@@ -38,7 +84,10 @@ const ServiceCard = ({ item }) => {
         </ul>
         <div className="flex justify-between items-center">
           <span className="text-lg font-bold text-blue-600">${price}</span>
-          <button className="text-white bg-blue-600 hover:bg-blue-700 px-4 py-1 rounded-md text-sm">
+          <button
+            onClick={() => handleAddCart(item)}
+            className="px-5 py-2 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 transition duration-300 border-orange-600 btn btn-outline border-0 border-b-4 text-sm"
+          >
             Buy Now
           </button>
         </div>

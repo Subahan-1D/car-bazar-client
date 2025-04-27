@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext} from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -33,6 +34,14 @@ const Header = () => {
       <li>
         <Link to="/secret" className="hover:text-blue-500 transition">
           Secret
+        </Link>
+      </li>
+      <li>
+        <Link to="/" className="hover:text-blue-500 transition -mt-2">
+          <button className="btn">
+            <FaShoppingCart></FaShoppingCart>
+            <div className="badge badge-sm badge-secondary">+0</div>
+          </button>
         </Link>
       </li>
     </>
@@ -86,19 +95,27 @@ const Header = () => {
       </div>
 
       {user ? (
-        <div className="navbar-end">
-          <button
-            onClick={handleLogOut}
-            className="btn btn-md rounded-lg bg-blue-500 text-xl hover:bg-blue-700 text-white  px-6 shadow"
-          >
-            Sign Out
-          </button>
+        <div className="navbar-end flex items-center gap-4">
+          <div className="flex justify-end gap-2">
+            <button
+              onClick={handleLogOut}
+              className="btn btn-md rounded-lg bg-blue-500 text-white hover:bg-blue-700 px-5 shadow text-base sm:text-lg"
+            >
+              Sign Out
+            </button>
+            <img
+              referrerPolicy="no-referrer"
+              src={user?.photoURL || ""}
+              alt="Profile"
+              className="w-10 h-10 rounded-full border-2 border-blue-500 object-cover"
+            />
+          </div>
         </div>
       ) : (
         <div className="navbar-end">
           <Link
             to="/login"
-            className="btn btn-md rounded-lg bg-blue-500 text-xl hover:bg-blue-700 text-white  px-6 shadow"
+            className="btn btn-md rounded-lg bg-blue-500 text-white hover:bg-blue-700 px-6 shadow text-base sm:text-lg"
           >
             Sign In
           </Link>

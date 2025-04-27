@@ -15,7 +15,8 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const from= location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/";
+  console.log("state in the login page ", location.state);
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
@@ -178,6 +179,7 @@ const Login = () => {
               <div className="mt-6">
                 <input
                   type="submit"
+                  // Todo : apply disabled for re captcha
                   disabled={disabled}
                   value="Sign In"
                   className={`w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-800 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50 ${
