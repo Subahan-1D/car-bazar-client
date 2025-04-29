@@ -3,16 +3,17 @@ import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import { axiosSecure } from "../hooks/useAxiosSecure";
+import useCart from "../hooks/useCart";
 
 const OurServiceCard = ({ item }) => {
   const { title, price, image, description, features, _id } = item;
   const { user } = useAuth();
+  const [, refetch] = useCart();
   const navigate = useNavigate();
   const location = useLocation();
-  const handleAddCart = (service) => {
+  const handleAddCart = () => {
     if (user && user?.email) {
-      // TODO : Sent to cart
-
+      // Sent to cart
       const serviceCartItem = {
         serviceItem: _id,
         email: user?.email,
@@ -30,9 +31,10 @@ const OurServiceCard = ({ item }) => {
             showConfirmButton: false,
             timer: 1500,
           });
+          // data update to the browser
+          refetch();
         }
       });
-      console.log(service, user.email);
     } else {
       Swal.fire({
         title: "You are not Logged In ",
@@ -86,7 +88,7 @@ const OurServiceCard = ({ item }) => {
         <div className="flex justify-between items-center">
           <span className="text-lg font-bold text-blue-600">${price}</span>
           <button
-            onClick={() => handleAddCart(item)}
+            onClick={handleAddCart}
             className="px-5 py-2 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 transition duration-300 border-orange-600 btn btn-outline border-0 border-b-4 text-sm"
           >
             Buy Now

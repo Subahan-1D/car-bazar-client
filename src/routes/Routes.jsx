@@ -9,6 +9,11 @@ import ErrorPage from "../pages/Login/ErrorPage";
 import Registration from "../pages/Login/Registration";
 import Secret from "../shared/Secret";
 import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../layout/Dashboard/Dashboard";
+import Cart from "../pages/DashboardPage/Cart";
+import UserHome from "../pages/DashboardPage/UserHome";
+import Review from "../pages/DashboardPage/Review";
+import MyBooking from "../pages/DashboardPage/MyBooking";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +56,28 @@ export const router = createBrowserRouter([
             <Secret></Secret>
           </PrivateRoute>
         ),
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "cart",
+        element: <Cart></Cart>,
+      },
+      {
+        path: "userHome",
+        element: <UserHome></UserHome>,
+      },
+      {
+        path: "review",
+        element: <Review></Review>,
+      },
+      {
+        path: "booking",
+        element: <MyBooking></MyBooking>,
       },
     ],
   },

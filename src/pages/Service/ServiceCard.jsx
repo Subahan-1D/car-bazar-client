@@ -1,14 +1,15 @@
-import React from "react";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import { axiosSecure } from "../../hooks/useAxiosSecure";
+import useCart from "../../hooks/useCart";
 
 const ServiceCard = ({ item }) => {
   const { title, price, image, description, features, _id } = item;
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [, refetch] = useCart();
   const handleAddCart = (service) => {
     if (user && user?.email) {
       // TODO : Sent to cart
@@ -29,6 +30,8 @@ const ServiceCard = ({ item }) => {
             showConfirmButton: false,
             timer: 1500,
           });
+          // refetch
+          refetch();
         }
       });
     } else {
@@ -85,7 +88,7 @@ const ServiceCard = ({ item }) => {
         <div className="flex justify-between items-center">
           <span className="text-lg font-bold text-blue-600">${price}</span>
           <button
-            onClick={() => handleAddCart(item)}
+            onClick={handleAddCart}
             className="px-5 py-2 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 transition duration-300 border-orange-600 btn btn-outline border-0 border-b-4 text-sm"
           >
             Buy Now

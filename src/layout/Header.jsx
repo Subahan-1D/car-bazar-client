@@ -1,13 +1,15 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../hooks/useCart";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-
+  const [cart] = useCart();
+  console.log(cart);
   const from = location.state?.from?.pathname || "/";
   const navLinks = (
     <>
@@ -37,10 +39,13 @@ const Header = () => {
         </Link>
       </li>
       <li>
-        <Link to="/" className="hover:text-blue-500 transition -mt-2">
+        <Link
+          to="/dashboard/cart"
+          className="hover:text-blue-500 transition -mt-2"
+        >
           <button className="btn">
             <FaShoppingCart></FaShoppingCart>
-            <div className="badge badge-sm badge-secondary">+0</div>
+            <div className="badge badge-sm badge-secondary">+{cart.length}</div>
           </button>
         </Link>
       </li>
