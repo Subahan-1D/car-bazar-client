@@ -14,6 +14,10 @@ import Cart from "../pages/DashboardPage/Cart";
 import UserHome from "../pages/DashboardPage/UserHome";
 import Review from "../pages/DashboardPage/Review";
 import MyBooking from "../pages/DashboardPage/MyBooking";
+import Admin from "../pages/DashboardPage/DashboardPageAdmin/Admin";
+import AddService from "../pages/DashboardPage/DashboardPageAdmin/AddService";
+import ManageService from "../pages/DashboardPage/DashboardPageAdmin/ManageService";
+import AllUser from "../pages/DashboardPage/DashboardPageAdmin/AllUser";
 
 export const router = createBrowserRouter([
   {
@@ -82,6 +86,23 @@ export const router = createBrowserRouter([
       {
         path: "booking",
         element: <MyBooking></MyBooking>,
+      },
+      // admin route
+      {
+        path: "admin",
+        element: <Admin></Admin>,
+      },
+      {
+        path: "addService",
+        element: <AddService></AddService>,
+      },
+      {
+        path: "manageService",
+        element: <ManageService></ManageService>,
+      },
+      {
+        path: "allUser",
+        element: <AllUser></AllUser>,
       },
     ],
   },

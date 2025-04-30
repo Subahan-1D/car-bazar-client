@@ -10,10 +10,12 @@ import { AuthContext } from "../../provider/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const Login = () => {
   const { signIn, googleSignIn } = useAuth();
   const [disabled, setDisabled] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+  const axiosPublic = useAxiosPublic()
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
@@ -61,22 +63,30 @@ const Login = () => {
     }
   };
   const handleGoogleSignIn = () => {
-    googleSignIn()
-      .then((result) => {
-        console.log(result.user);
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: " Sign In Successfully",
-          showConfirmButton: false,
-          timer: 1500,
+      googleSignIn()
+        .then((result) => {
+          console.log(result.user);
+          const userInfo = {
+            email: result.user?.email,
+            name: result.user?.displayName,
+          };
+          axiosPublic.post("/users", userInfo).then((res) => {
+            console.log(res.data);
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: " Sign Up Successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate(from, { replace: true });
+          });
+        })
+        .catch((error) => {
+          console.log(error.message);
         });
-        navigate(from, { replace: true });
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
+    };
+  
 
   return (
     <>

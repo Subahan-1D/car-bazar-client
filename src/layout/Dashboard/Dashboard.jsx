@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { Menu } from "lucide-react";
-import { FaAd, FaHome, FaList, FaShoppingCart } from "react-icons/fa";
+import { FaAd, FaHome, FaList, FaListAlt, FaShoppingCart, FaUsers } from "react-icons/fa";
 import { IoMdContacts } from "react-icons/io";
 import { FcServices } from "react-icons/fc";
 import { Helmet } from "react-helmet-async";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const isAdmin = true;
 
   return (
     <>
@@ -38,77 +40,146 @@ const Dashboard = () => {
             <div className="divider"></div>
             <nav>
               <ul className="flex flex-col gap-2">
-                {/* User Home */}
-                <li>
-                  <NavLink
-                    to="/dashboard/userHome"
-                    className={({ isActive }) =>
-                      `flex items-center gap-2 rounded-lg px-4 py-2 font-medium ${
-                        isActive
-                          ? "bg-blue-500 text-white"
-                          : "text-gray-700 hover:bg-blue-100 hover:text-blue-600"
-                      }`
-                    }
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <FaHome className="text-xl" />
-                    <span>User Home</span>
-                  </NavLink>
-                </li>
-
-                {/* My Cart */}
-                <li>
-                  <NavLink
-                    to="/dashboard/cart"
-                    className={({ isActive }) =>
-                      `flex items-center gap-2 rounded-lg px-4 py-2 font-medium ${
-                        isActive
-                          ? "bg-blue-500 text-white"
-                          : "text-gray-700 hover:bg-blue-100 hover:text-blue-600"
-                      }`
-                    }
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <FaShoppingCart className="text-xl" />
-                    <span>My Cart</span>
-                  </NavLink>
-                </li>
-
-                {/* My Booking */}
-                <li>
-                  <NavLink
-                    to="/dashboard/booking"
-                    className={({ isActive }) =>
-                      `flex items-center gap-2 rounded-lg px-4 py-2 font-medium ${
-                        isActive
-                          ? "bg-blue-500 text-white"
-                          : "text-gray-700 hover:bg-blue-100 hover:text-blue-600"
-                      }`
-                    }
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <FaList className="text-xl" />
-                    <span>My Booking</span>
-                  </NavLink>
-                </li>
-
-                {/* Review */}
-                <li>
-                  <NavLink
-                    to="/dashboard/review"
-                    className={({ isActive }) =>
-                      `flex items-center gap-2 rounded-lg px-4 py-2 font-medium ${
-                        isActive
-                          ? "bg-blue-500 text-white"
-                          : "text-gray-700 hover:bg-blue-100 hover:text-blue-600"
-                      }`
-                    }
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <FaAd className="text-xl" />
-                    <span>Review</span>
-                  </NavLink>
-                </li>
+                {isAdmin ? (
+                  <>
+                    <li>
+                      <NavLink
+                        to="/dashboard/admin"
+                        className={({ isActive }) =>
+                          `flex items-center gap-2 rounded-lg px-4 py-2 font-medium ${
+                            isActive
+                              ? "bg-blue-500 text-white"
+                              : "text-gray-700 hover:bg-blue-100 hover:text-blue-600"
+                          }`
+                        }
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <FaHome className="text-xl" />
+                        <span>Admin Home</span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/dashboard/addService"
+                        className={({ isActive }) =>
+                          `flex items-center gap-2 rounded-lg px-4 py-2 font-medium ${
+                            isActive
+                              ? "bg-blue-500 text-white"
+                              : "text-gray-700 hover:bg-blue-100 hover:text-blue-600"
+                          }`
+                        }
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <FcServices className="text-xl" />
+                        <span>Add Service</span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/dashboard/manageService"
+                        className={({ isActive }) =>
+                          `flex items-center gap-2 rounded-lg px-4 py-2 font-medium ${
+                            isActive
+                              ? "bg-blue-500 text-white"
+                              : "text-gray-700 hover:bg-blue-100 hover:text-blue-600"
+                          }`
+                        }
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <FaListAlt className="text-xl" />
+                        <span>Manage Service</span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/dashboard/allUser"
+                        className={({ isActive }) =>
+                          `flex items-center gap-2 rounded-lg px-4 py-2 font-medium ${
+                            isActive
+                              ? "bg-blue-500 text-white"
+                              : "text-gray-700 hover:bg-blue-100 hover:text-blue-600"
+                          }`
+                        }
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <FaUsers className="text-xl" />
+                        <span>All Users</span>
+                      </NavLink>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    {" "}
+                    {/* User Home */}
+                    <li>
+                      <NavLink
+                        to="/dashboard/userHome"
+                        className={({ isActive }) =>
+                          `flex items-center gap-2 rounded-lg px-4 py-2 font-medium ${
+                            isActive
+                              ? "bg-blue-500 text-white"
+                              : "text-gray-700 hover:bg-blue-100 hover:text-blue-600"
+                          }`
+                        }
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <FaHome className="text-xl" />
+                        <span>User Home</span>
+                      </NavLink>
+                    </li>
+                    {/* My Cart */}
+                    <li>
+                      <NavLink
+                        to="/dashboard/cart"
+                        className={({ isActive }) =>
+                          `flex items-center gap-2 rounded-lg px-4 py-2 font-medium ${
+                            isActive
+                              ? "bg-blue-500 text-white"
+                              : "text-gray-700 hover:bg-blue-100 hover:text-blue-600"
+                          }`
+                        }
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <FaShoppingCart className="text-xl" />
+                        <span>My Cart</span>
+                      </NavLink>
+                    </li>
+                    {/* My Booking */}
+                    <li>
+                      <NavLink
+                        to="/dashboard/booking"
+                        className={({ isActive }) =>
+                          `flex items-center gap-2 rounded-lg px-4 py-2 font-medium ${
+                            isActive
+                              ? "bg-blue-500 text-white"
+                              : "text-gray-700 hover:bg-blue-100 hover:text-blue-600"
+                          }`
+                        }
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <FaList className="text-xl" />
+                        <span>My Booking</span>
+                      </NavLink>
+                    </li>
+                    {/* Review */}
+                    <li>
+                      <NavLink
+                        to="/dashboard/review"
+                        className={({ isActive }) =>
+                          `flex items-center gap-2 rounded-lg px-4 py-2 font-medium ${
+                            isActive
+                              ? "bg-blue-500 text-white"
+                              : "text-gray-700 hover:bg-blue-100 hover:text-blue-600"
+                          }`
+                        }
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <FaAd className="text-xl" />
+                        <span>Review</span>
+                      </NavLink>
+                    </li>
+                  </>
+                )}
 
                 {/* Divider */}
                 <div className="divider"></div>

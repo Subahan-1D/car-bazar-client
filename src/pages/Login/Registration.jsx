@@ -57,14 +57,21 @@ const Registration = () => {
     googleSignIn()
       .then((result) => {
         console.log(result.user);
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: " Sign Up Successfully",
-          showConfirmButton: false,
-          timer: 1500,
+        const userInfo = {
+          email: result.user?.email,
+          name: result.user?.displayName,
+        };
+        axiosPublic.post("/users", userInfo).then((res) => {
+          console.log(res.data);
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: " Sign Up Successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate(from, { replace: true });
         });
-        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.log(error.message);

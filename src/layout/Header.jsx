@@ -40,7 +40,7 @@ const Header = () => {
       </li>
       <li>
         <Link
-          to="/dashboard/cart"
+          to="/dashboard/userHome"
           className="hover:text-blue-500 transition -mt-2"
         >
           <button className="btn">
