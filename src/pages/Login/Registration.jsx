@@ -1,16 +1,16 @@
 // components/LoginForm.jsx
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useAuth from "../../hooks/useAuth";
 
 const Registration = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile, googleSignIn } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
@@ -53,6 +53,24 @@ const Registration = () => {
     });
   };
 
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        console.log(result.user);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: " Sign Up Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   return (
     <>
       <Helmet>
@@ -81,7 +99,10 @@ const Registration = () => {
             </div>
 
             {/* Google Sign In */}
-            <button className="w-full border py-2 rounded-md flex items-center justify-center gap-2 mb-4">
+            <button
+              onClick={handleGoogleSignIn}
+              className="w-full border py-2 rounded-md flex items-center justify-center gap-2 mb-4"
+            >
               <img
                 src="https://img.icons8.com/color/48/000000/google-logo.png"
                 alt="google"

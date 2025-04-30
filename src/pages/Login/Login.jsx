@@ -9,8 +9,9 @@ import {
 import { AuthContext } from "../../provider/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 const Login = () => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, googleSignIn } = useAuth();
   const [disabled, setDisabled] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const location = useLocation();
@@ -59,6 +60,24 @@ const Login = () => {
       setDisabled(true);
     }
   };
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        console.log(result.user);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: " Sign In Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   return (
     <>
       <Helmet>
@@ -108,9 +127,12 @@ const Login = () => {
                 </svg>
               </div>
 
-              <span className="w-5/6 px-4 py-3 font-bold text-center">
+              <button
+                onClick={handleGoogleSignIn}
+                className="w-5/6 px-4 py-3 font-bold text-center"
+              >
                 Sign in with Google
-              </span>
+              </button>
             </div>
 
             <div className="flex items-center justify-between mt-4">
