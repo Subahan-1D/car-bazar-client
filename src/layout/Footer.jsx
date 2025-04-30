@@ -1,5 +1,3 @@
-
-;
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -279,7 +277,7 @@ const Footer = () => {
                 </li>
                 <li className="mb-6">
                   <Link
-                    href="/"
+                    to="/about"
                     className="text-gray-600 max-lg:flex hover:text-gray-900"
                   >
                     About
@@ -287,7 +285,7 @@ const Footer = () => {
                 </li>
                 <li className="mb-6">
                   <Link
-                    href="/"
+                    to="/service"
                     className="text-gray-600 max-lg:flex hover:text-gray-900"
                   >
                     Service
@@ -295,7 +293,7 @@ const Footer = () => {
                 </li>
                 <li className="mb-6">
                   <Link
-                    href="/"
+                    to="/contact"
                     className="text-gray-600 max-lg:flex hover:text-gray-900"
                   >
                     Contact
@@ -379,7 +377,6 @@ const Footer = () => {
               </a>
             </div>
             <div className="grid grid-cols-3 gap-3 max-w-sm mx-auto ">
-             
               <div className="block">
                 <Link href="https://subahan-ali-portfolio.web.app/">
                   <img
