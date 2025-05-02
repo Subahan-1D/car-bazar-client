@@ -2,8 +2,8 @@ import React from "react";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
-import { axiosSecure } from "../hooks/useAxiosSecure";
 import useCart from "../hooks/useCart";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const OurServiceCard = ({ item }) => {
   const { title, price, image, description, features, _id } = item;
@@ -11,6 +11,7 @@ const OurServiceCard = ({ item }) => {
   const [, refetch] = useCart();
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosSecure = useAxiosSecure();
   const handleAddCart = () => {
     if (user && user?.email) {
       // Sent to cart

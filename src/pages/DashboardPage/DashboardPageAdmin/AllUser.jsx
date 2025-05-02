@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Helmet } from "react-helmet-async";
-import { FaAd, FaTrash, FaUsers } from "react-icons/fa";
+import { FaTrash, FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 const AllUser = () => {
@@ -14,6 +14,22 @@ const AllUser = () => {
       return res.data;
     },
   });
+
+  const handleMakeAdmin = (user) => {
+    axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        refetch();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${user.name} is Admin Now!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
 
   const handleDeleteUser = (user) => {
     Swal.fire({
@@ -82,7 +98,7 @@ const AllUser = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user, idx) => (
+              {Array.isArray(users) && users.map((user, idx) => (
                 <tr
                   key={user._id}
                   className="border-b hover:bg-gray-50 transition-all"
@@ -95,12 +111,19 @@ const AllUser = () => {
                     {user.name}
                   </td>
                   <td className="py-4 px-6 text-center">
-                    <button
-                      className="p-2 bg-blue-100 rounded-full hover:bg-blue-200 transition"
-                      title="Make Admin"
-                    >
-                      <FaUsers className="text-blue-600 text-lg" />
-                    </button>
+                    {user.role === "admin" ? (
+                      "Admin"
+                    ) : (
+                      <button
+                        className="p-2 bg-blue-100 rounded-full hover:bg-blue-200 transition"
+                        title="Make Admin"
+                      >
+                        <FaUsers
+                          onClick={() => handleMakeAdmin(user)}
+                          className="text-blue-600 text-lg"
+                        />
+                      </button>
+                    )}
                   </td>
                   <td className="py-4 px-6 text-center">
                     <button
