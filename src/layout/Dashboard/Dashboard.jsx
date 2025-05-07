@@ -1,15 +1,25 @@
 import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { Menu } from "lucide-react";
-import { FaAd, FaHome, FaList, FaListAlt, FaShoppingCart, FaUsers } from "react-icons/fa";
+import {
+  FaAd,
+  FaHome,
+  FaList,
+  FaListAlt,
+  FaShoppingCart,
+  FaUsers,
+} from "react-icons/fa";
 import { IoMdContacts } from "react-icons/io";
 import { FcServices } from "react-icons/fc";
 import { Helmet } from "react-helmet-async";
+import useAdmin from "../../hooks/useAdmin";
+import useCart from "../../hooks/useCart";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
+  const [cart] = useCart()
 
   return (
     <>
@@ -141,7 +151,7 @@ const Dashboard = () => {
                         onClick={() => setIsOpen(false)}
                       >
                         <FaShoppingCart className="text-xl" />
-                        <span>My Cart</span>
+                        <span>My Cart ({cart.length})</span>
                       </NavLink>
                     </li>
                     {/* My Booking */}
