@@ -18,6 +18,7 @@ import Admin from "../pages/DashboardPage/DashboardPageAdmin/Admin";
 import AddService from "../pages/DashboardPage/DashboardPageAdmin/AddService";
 import ManageService from "../pages/DashboardPage/DashboardPageAdmin/ManageService";
 import AllUser from "../pages/DashboardPage/DashboardPageAdmin/AllUser";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -90,19 +91,35 @@ export const router = createBrowserRouter([
       // admin route
       {
         path: "admin",
-        element: <Admin></Admin>,
+        element: (
+          <AdminRoute>
+            <Admin></Admin>
+          </AdminRoute>
+        ),
       },
       {
         path: "addService",
-        element: <AddService></AddService>,
+        element: (
+          <AdminRoute>
+            <AddService></AddService>
+          </AdminRoute>
+        ),
       },
       {
         path: "manageService",
-        element: <ManageService></ManageService>,
+        element: (
+          <AdminRoute>
+            <ManageService></ManageService>
+          </AdminRoute>
+        ),
       },
       {
         path: "allUser",
-        element: <AllUser></AllUser>,
+        element: (
+          <AdminRoute>
+            <AllUser></AllUser>
+          </AdminRoute>
+        ),
       },
     ],
   },

@@ -3,12 +3,14 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../hooks/useCart";
+import useAdmin from "../hooks/useAdmin";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const [cart] = useCart();
+  const [isAdmin] = useAdmin();
   console.log(cart);
   const from = location.state?.from?.pathname || "/";
   const navLinks = (
@@ -40,7 +42,7 @@ const Header = () => {
       </li>
       <li>
         <Link
-          to="/dashboard/userHome"
+          to="/dashboard/cart"
           className="hover:text-blue-500 transition -mt-2"
         >
           <button className="btn">
