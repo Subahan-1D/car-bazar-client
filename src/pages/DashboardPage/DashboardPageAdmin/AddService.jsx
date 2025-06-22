@@ -5,6 +5,7 @@ import { FaPlus } from "react-icons/fa";
 import SectionTitle from "../../../components/SectionTittle";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const image_hosting_key = import.meta.env.VITE_image_hosting_key;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -46,8 +47,16 @@ const AddService = () => {
       // data post mongodb
       const serviceRes = await axiosSecure.post("/service", serviceItem);
       console.log(serviceRes.data);
-      if(serviceRes.data.insertedId){
+      if (serviceRes.data.insertedId) {
         // Show Success popup
+        reset();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${data.title} is added to the service`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     }
 

@@ -77,7 +77,7 @@ const Cart = () => {
                 <th className="py-4 px-6">#</th>
                 <th className="py-4 px-6">Title</th>
                 <th className="py-4 px-6">Price</th>
-                <th className="py-4 px-6">Update</th>
+                {/* <th className="py-4 px-6">Update</th> */}
                 <th className="py-4 px-6">Delete</th>
               </tr>
             </thead>
@@ -105,11 +105,11 @@ const Cart = () => {
                   <td className="py-4 px-6 font-semibold text-green-600">
                     ${item.price}
                   </td>
-                  <td className="py-4 px-6">
+                  {/* <td className="py-4 px-6">
                     <button className="p-2 rounded-full hover:bg-blue-100 transition">
                       <FiEdit className="text-blue-600 text-xl" />
                     </button>
-                  </td>
+                  </td> */}
                   <td className="py-4 px-6">
                     <button
                       onClick={() => handleDelete(item._id)}
