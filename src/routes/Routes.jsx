@@ -19,6 +19,7 @@ import AddService from "../pages/DashboardPage/DashboardPageAdmin/AddService";
 import ManageService from "../pages/DashboardPage/DashboardPageAdmin/ManageService";
 import AllUser from "../pages/DashboardPage/DashboardPageAdmin/AllUser";
 import AdminRoute from "./AdminRoute";
+import UpdateService from "../pages/DashboardPage/UpdateService/UpdateService";
 
 export const router = createBrowserRouter([
   {
@@ -112,6 +113,19 @@ export const router = createBrowserRouter([
             <ManageService></ManageService>
           </AdminRoute>
         ),
+      },
+      {
+        path: "updateItem/:id",
+        element: (
+          <AdminRoute>
+            {" "}
+            <UpdateService></UpdateService>
+          </AdminRoute>
+        ),
+        loader: ({ params }) => {
+          console.log("Loader params:", params);
+          return fetch(`http://localhost:8000/service/${params.id}`);
+        },
       },
       {
         path: "allUser",

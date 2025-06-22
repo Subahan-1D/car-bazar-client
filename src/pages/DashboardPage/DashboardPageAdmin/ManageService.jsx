@@ -6,9 +6,10 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FiEdit } from "react-icons/fi";
 import { FaTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ManageService = () => {
-  const [service,, refetch] = useService();
+  const [service, , refetch] = useService();
   const axiosSecure = useAxiosSecure();
   const handleDeleteItem = (item) => {
     Swal.fire({
@@ -26,8 +27,8 @@ const ManageService = () => {
         if (res.data.deletedCount > 0) {
           refetch();
           Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
+            title: `${item.title}`,
+            text: "Your service item has been deleted.",
             icon: "success",
           });
         }
@@ -97,9 +98,11 @@ const ManageService = () => {
                     ${item.price}
                   </td>
                   <td className="py-4 px-6">
-                    <button className="p-2 rounded-full hover:bg-blue-100 transition">
-                      <FiEdit className="text-blue-600 text-xl" />
-                    </button>
+                    <Link to = {`/dashboard/updateItem/${item._id}`}>
+                      <button className="p-2 rounded-full hover:bg-blue-100 transition">
+                        <FiEdit className="text-blue-600 text-xl" />
+                      </button>
+                    </Link>
                   </td>
                   <td className="py-4 px-6">
                     <button

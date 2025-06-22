@@ -1,0 +1,228 @@
+import React from "react";
+import { Helmet } from "react-helmet-async";
+import SectionTitle from "../../../components/SectionTittle";
+import { useLoaderData } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { FaPlus } from "react-icons/fa";
+const image_hosting_key = import.meta.env.VITE_image_hosting_key;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+const UpdateService = () => {
+  const { title, price, category, features, description, _id } =
+    useLoaderData();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
+  const onSubmit = async (data) => {
+    const featuresArray = data.features
+      .split(",")
+      .map((item) => item.trim())
+      .filter((item) => item.length > 0);
+
+    const formData = {
+      ...data,
+      features: featuresArray,
+    };
+    const imageFile = { image: data.image[0] };
+
+    const res = await axiosPublic.post(image_hosting_api, imageFile, {
+      headers: { "content-type": "multipart/form-data" },
+    });
+    if (res.data.success) {
+      // now send the service item data to the server image url
+      const serviceItem = {
+        category: data.category,
+        title: data.title,
+        price: parseFloat(data.price),
+        image: res.data.data.display_url,
+        description: data.description,
+        features: featuresArray,
+      };
+      // data post mongodb
+      const serviceRes = await axiosSecure.patch(
+        `/service/${_id}`,
+        serviceItem
+      );
+      console.log(serviceRes.data);
+      if (serviceRes.data.modifiedCount > 0) {
+        // Show Success popup
+        reset();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${data.title} is Updated to the service`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    }
+
+    console.log("with image url ", res.data);
+    console.log("Final Form Data:", formData);
+    reset();
+  };
+
+  return (
+    <>
+      <Helmet>
+        <title>carBazar | Dashboard | Service Update</title>
+      </Helmet>
+      <SectionTitle heading="Update Service Item"></SectionTitle>
+      <div className="bg-white border rounded-xl max-w-4xl mx-auto mt-10 p-8 shadow-lg">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          {/* Title */}
+          <div>
+            <label className="block mb-1 text-gray-700 font-semibold">
+              Service Title *
+            </label>
+            <input
+              type="text"
+              defaultValue={title}
+              {...register("title", { required: "Title is required" })}
+              placeholder="Brake Pad Replacement"
+              className="input input-bordered w-full"
+            />
+            {errors.title && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.title.message}
+              </p>
+            )}
+          </div>
+
+          {/* Price + Image */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block mb-1 text-gray-700 font-semibold">
+                Price ($) *
+              </label>
+              <input
+                type="number"
+                defaultValue={price}
+                {...register("price", { required: "Price is required" })}
+                placeholder=""
+                className="input input-bordered w-full"
+              />
+              {errors.price && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.price.message}
+                </p>
+              )}
+            </div>
+            <div>
+              <label className="block mb-1 text-gray-700 font-semibold">
+                Image *
+              </label>
+              <input
+                type="file"
+                {...register("image", { required: "Image is required" })}
+                className="file-input file-input-bordered w-full"
+              />
+              {errors.image && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.image.message}
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* Category */}
+          <div>
+            <label className="block mb-1 text-gray-700 font-semibold">
+              Category *
+            </label>
+            <select
+              defaultValue={category}
+              {...register("category", { required: "Category is required" })}
+              className="select select-bordered w-full"
+            >
+              <option disabled value="">
+                Select a category
+              </option>
+              <option value="Home Service">Home Service</option>
+              <option value="Brake Service">Brake Service</option>
+              <option value="Engine Replace">Engine Replace</option>
+              <option value="Battery Service">Battery Service</option>
+              <option value="Car Observation">Car Observation</option>
+              <option value="Tire Repair">Tire Repair</option>
+            </select>
+            {errors.category && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.category.message}
+              </p>
+            )}
+          </div>
+
+          {/* Features */}
+          <div>
+            <label className="block mb-1 text-gray-700 font-semibold">
+              Features (comma separated) *
+            </label>
+            <input
+              type="text"
+              defaultValue={features}
+              {...register("features", {
+                required: "At least 3 features are required",
+                validate: (value) => {
+                  const features = value
+                    .split(",")
+                    .map((item) => item.trim())
+                    .filter((item) => item.length > 0);
+                  return (
+                    features.length >= 3 || "Please enter at least 3 features"
+                  );
+                },
+              })}
+              placeholder="Brake inspection, Engine report, Battery check"
+              className="input input-bordered w-full"
+            />
+            {errors.features && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.features.message}
+              </p>
+            )}
+          </div>
+
+          {/* Description */}
+          <div>
+            <label className="block mb-1 text-gray-700 font-semibold">
+              Description *
+            </label>
+            <textarea
+              defaultValue={description}
+              {...register("description", {
+                required: "Description is required",
+              })}
+              placeholder="Smooth and safe braking with professional service."
+              className="textarea textarea-bordered w-full h-28"
+            />
+            {errors.description && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.description.message}
+              </p>
+            )}
+          </div>
+
+          {/* Submit */}
+          <div className="text-center pt-4">
+            <button
+              type="submit"
+              className="btn px-8 py-3 text-white bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 transition-all duration-300 shadow-md"
+            >
+              <FaPlus className="mr-2" />
+              Update Service
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
+  );
+};
+
+export default UpdateService;
