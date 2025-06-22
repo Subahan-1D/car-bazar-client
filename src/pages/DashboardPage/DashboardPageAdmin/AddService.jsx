@@ -3,7 +3,11 @@ import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { FaPlus } from "react-icons/fa";
 import SectionTitle from "../../../components/SectionTittle";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
+const image_hosting_key = import.meta.env.VITE_image_hosting_key;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const AddService = () => {
   const {
     register,
@@ -11,6 +15,8 @@ const AddService = () => {
     reset,
     formState: { errors },
   } = useForm();
+  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const onSubmit = async (data) => {
     const featuresArray = data.features
@@ -21,9 +27,31 @@ const AddService = () => {
     const formData = {
       ...data,
       features: featuresArray,
-      image: data.image[0]?.name || "",
     };
+    const imageFile = { image: data.image[0] };
 
+    const res = await axiosPublic.post(image_hosting_api, imageFile, {
+      headers: { "content-type": "multipart/form-data" },
+    });
+    if (res.data.success) {
+      // now send the service item data to the server image url
+      const serviceItem = {
+        category: data.category,
+        title: data.title,
+        price: parseFloat(data.price),
+        image: res.data.data.display_url,
+        description: data.description,
+        features: featuresArray,
+      };
+      // data post mongodb
+      const serviceRes = await axiosSecure.post("/service", serviceItem);
+      console.log(serviceRes.data);
+      if(serviceRes.data.insertedId){
+        // Show Success popup
+      }
+    }
+
+    console.log("with image url ", res.data);
     console.log("Final Form Data:", formData);
     reset();
   };
@@ -80,7 +108,6 @@ const AddService = () => {
               </label>
               <input
                 type="file"
-                accept="image/*"
                 {...register("image", { required: "Image is required" })}
                 className="file-input file-input-bordered w-full"
               />

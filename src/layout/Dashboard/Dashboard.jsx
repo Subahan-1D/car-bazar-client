@@ -19,7 +19,7 @@ const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [isAdmin] = useAdmin();
-  const [cart] = useCart()
+  const [cart] = useCart();
 
   return (
     <>
@@ -66,6 +66,23 @@ const Dashboard = () => {
                       >
                         <FaHome className="text-xl" />
                         <span>Admin Home</span>
+                      </NavLink>
+                    </li>
+                    {/* My Cart */}
+                    <li>
+                      <NavLink
+                        to="/dashboard/cart"
+                        className={({ isActive }) =>
+                          `flex items-center gap-2 rounded-lg px-4 py-2 font-medium ${
+                            isActive
+                              ? "bg-blue-500 text-white"
+                              : "text-gray-700 hover:bg-blue-100 hover:text-blue-600"
+                          }`
+                        }
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <FaShoppingCart className="text-xl" />
+                        <span>My Cart ({cart.length})</span>
                       </NavLink>
                     </li>
                     <li>

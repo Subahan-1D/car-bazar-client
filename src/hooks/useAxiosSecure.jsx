@@ -14,7 +14,7 @@ const useAxiosSecure = () => {
     function (config) {
       const token = localStorage.getItem("access-token");
       config.headers.authorization = `Bearer ${token}`;
-      console.log("request stoped by interceptors", token);
+      // console.log("request stoped by interceptors", token);
       return config;
     },
     function (error) {
@@ -30,7 +30,7 @@ const useAxiosSecure = () => {
     async (error) => {
       const status = error.response.status;
 
-      console.log("Status Error for the interceptors", status);
+      // console.log("Status Error for the interceptors", status);
 
       // for 401 or 403 logOut the user move the user or login page
       if (status === 401 || status === 403) {
